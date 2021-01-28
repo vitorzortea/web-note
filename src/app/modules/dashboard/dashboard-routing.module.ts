@@ -1,29 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AllNotesComponent } from './all-notes/all-notes.component';
 import { DashboardComponent } from './dashboard.component';
+import { SettingComponent } from './setting/setting.component';
+import { TrashComponent } from './trash/trash.component';
 
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: 'login'
+  redirectTo: 'notes'
 },
 {
   path: '',
   component: DashboardComponent,
-  /*children: [
+  children: [
     {
-      path: 'login',
-      component: LoginComponent
+      path: 'notes',
+      component: AllNotesComponent
     },
     {
-      path: 'forgotpass',
-      component: ForgotpassComponent
+      path: 'trash',
+      component: TrashComponent
     },
     {
-      path: 'register',
-      component: RegisterComponent
+      path: 'setting',
+      component: SettingComponent
     }
-  ]*/
+  ]
 }
 ];
 
