@@ -1,0 +1,13 @@
+<section>
+  <h2>Sing Up</h2>
+  <form>
+    <input type="text" name="nome" placeholder="Nome">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="senha" placeholder="Senha" (change)="verifyPass()">
+    <input type="password" name="conf-senha" placeholder="Confirmar Senha" (change)="verifyPass()">
+    <button>Register</button>
+  </form>
+  <p>
+    <a routerLink="/login">To Back</a>
+  </p>
+</section>

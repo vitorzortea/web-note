@@ -1,0 +1,64 @@
+section
+  width: 100%
+  min-height: 100vh
+  display: flex
+
+  &>div
+    width: 50%
+    position: relative
+    background-image: url(/assets/img/bg-auth.jpg)
+    background-size: cover
+    background-position: center left
+    display: flex
+    align-items: center
+
+    h1
+      width: 150px
+      position: absolute
+      top: 20px
+      left: 20px
+
+    &>img
+      width: 80%
+      display: table
+      margin: 0 0 0 auto
+      position: relative
+      z-index: 3
+      transform: translate(4.5%, 0)
+
+  main
+    width: 50%
+    background-image: linear-gradient(to top, #ada996 0%, #eaeaea 10%, #dbdbdb 20%, #f2f2f2 97%, #ada996 100%)
+    color: #867867
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5)
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: space-between
+    position: relative
+    z-index: 2
+    padding: 40px 20px 0px
+
+    &>h1
+      width: 200px
+      max-width: 100%
+      margin-bottom: 10px
+
+  footer
+    text-align: center
+    padding-top: 10px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+
+    a
+      font-weight: bold
+
+    i
+      font-size: 32px
+      padding: 5px
+
+      &:hover
+        color: #FE8102
+
