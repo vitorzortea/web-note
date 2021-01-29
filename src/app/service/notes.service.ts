@@ -39,8 +39,7 @@ export class NotesService {
   }
 
   sendToTrash(id){
-    alert(id)
-    const noteSelect = this.notes[0]
+    const noteSelect = this.notes[id]
     this.notes.splice(id,1)
     this.trash.push(noteSelect)
     localStorage.setItem('notes', JSON.stringify(this.notes))
@@ -48,7 +47,7 @@ export class NotesService {
   }
 
   restoreTrash(id){
-    const noteSelect = this.trash[0]
+    const noteSelect = this.trash[id]
     this.trash.splice(id,1)
     this.notes.push(noteSelect)
     localStorage.setItem('notes', JSON.stringify(this.notes))

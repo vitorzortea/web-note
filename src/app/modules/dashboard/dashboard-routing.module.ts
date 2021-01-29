@@ -4,6 +4,7 @@ import { AllNotesComponent } from './all-notes/all-notes.component';
 import { DashboardComponent } from './dashboard.component';
 import { NoteComponent } from './note/note.component';
 import { SettingComponent } from './setting/setting.component';
+import { SingleTrashComponent } from './single-trash/single-trash.component';
 import { TrashComponent } from './trash/trash.component';
 
 const routes: Routes = [{
@@ -31,7 +32,13 @@ const routes: Routes = [{
     },
     {
       path: 'trash',
-      component: TrashComponent
+      component: TrashComponent,
+      children: [
+        {
+          path: ':id',
+          component: SingleTrashComponent
+        }
+      ]
     },
     {
       path: 'setting',

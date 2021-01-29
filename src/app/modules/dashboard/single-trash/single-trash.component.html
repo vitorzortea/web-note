@@ -1,0 +1,9 @@
+<section>
+  <h2>{{note.title}}</h2>
+  <p>Tag 1</p>
+  <textarea [(ngModel)]="note.text" name="text" disabled></textarea>
+  <span>
+    <button (click)="restaure()"><i class="fas fa-trash-undo-alt"></i> Restore</button>
+    <button (click)="trash()"><i class="fas fa-trash-alt"></i> Permanently delete</button>
+  </span>
+</section>

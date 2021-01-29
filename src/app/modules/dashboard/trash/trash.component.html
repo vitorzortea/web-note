@@ -1,1 +1,40 @@
-<p>trash works!</p>
+<section>
+  <div class="secondary-menu">
+      <span>
+        <h1>Trash</h1>
+        <button *ngIf="notes[0]" (click)="empty()"><i class="far fa-trash"></i> Empty the Trash</button>
+      </span>
+      <form id="search-form" *ngIf="notes[1]">
+        <input type="search" placeholder="Search Note" />
+        <i class="fas fa-search"></i>
+      </form>
+    <ng-container *ngIf="notes[0]">
+      <ul id="list-all-note" class="list-note">
+        <li *ngFor="let note of notes; let i=index">
+          <a routerLink="/dashboard/trash/{{i}}" routerLinkActive="active">
+            <div class="date">
+              <div>
+                <span>{{note.date | date: 'dd'}}</span>
+                <span>{{note.date | date: 'MMM'}}</span>
+              </div>
+              <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.28 26.67">
+                <polygon points="0,26.67 0,0 26.67,0 "/><polygon points="53.28,26.67 26.61,0 53.28,0 "/>
+              </svg>
+            </div>
+            <div class="resume">
+              <h2>{{note.title}}</h2>
+              <p>{{note.resume}}</p>
+              <div *ngIf="note.tag">{{note.tag}}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="!notes[0]">
+      <p>There's nothing in the trash</p>
+    </ng-container>
+  </div>
+  <div id="router-note">
+    <router-outlet></router-outlet>
+  </div>
+</section>

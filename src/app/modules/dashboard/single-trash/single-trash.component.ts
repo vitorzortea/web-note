@@ -5,11 +5,11 @@ import { Note } from 'src/app/models/note.model';
 import { NotesService } from 'src/app/service/notes.service';
 
 @Component({
-  selector: 'app-note',
-  templateUrl: './note.component.html',
-  styleUrls: ['./note.component.styl']
+  selector: 'app-single-trash',
+  templateUrl: './single-trash.component.html',
+  styleUrls: ['./single-trash.component.styl']
 })
-export class NoteComponent implements OnInit {
+export class SingleTrashComponent implements OnInit {
 
   note: Note
   id: string
@@ -17,28 +17,26 @@ export class NoteComponent implements OnInit {
 
   constructor(
     public noteService: NotesService,
+    private router: Router,
     private route: ActivatedRoute,
-    private router: Router
   ) {
     this.subscription = route.params.subscribe(val => {
       this.id = this.route.snapshot.paramMap.get('id');
-      (this.id) ? this.note = this.noteService.notes[this.id] : this.note = {title: '', resume: '', text: '', date: new Date()}
+      this.note = this.noteService.trash[this.id]
     });
   }
+
   ngOnInit(): void {}
 
-  send(){
-    if (this.id){
-      this.noteService.updateNote(this.id, this.note)
-    } else {
-      this.noteService.createNote(this.note)
-      this.router.navigate(['/dashboard/notes/'])
-    }
+  restaure(){
+    this.noteService.restoreTrash(this.id);
+    this.router.navigate(['/dashboard/notes'])
   }
   trash(){
-    this.noteService.sendToTrash(this.id);
-    this.router.navigate(['/dashboard/notes/'])
+    this.noteService.deleteNote(this.id);
+    this.router.navigate(['/dashboard/trash'])
   }
 
   ngOnDestroy() { this.subscription.unsubscribe() }
+
 }

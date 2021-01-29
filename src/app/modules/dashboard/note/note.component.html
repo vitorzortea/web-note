@@ -12,6 +12,6 @@
       <ng-container *ngIf="id">Update</ng-container>
       <ng-container *ngIf="!id">Save</ng-container>
     </button>
-    <button (click)="noteService.sendToTrash(id)"><i class="fas fa-trash-alt"></i></button>
+    <button (click)="trash()"><i class="fas fa-trash-alt"></i></button>
   </span>
 </form>

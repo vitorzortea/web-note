@@ -4,7 +4,7 @@
         <h1>All Notes</h1>
         <button routerLink="/dashboard/notes/new-note"><i class="fas fa-plus-circle"></i> Add Note</button>
       </span>
-      <form id="search-form" *ngIf="notes[0]">
+      <form id="search-form" *ngIf="notes[1]">
         <input type="search" placeholder="Search Note" />
         <i class="fas fa-search"></i>
       </form>
@@ -29,6 +29,9 @@
           </a>
         </li>
       </ul>
+    </ng-container>
+    <ng-container *ngIf="!notes[0]">
+      <p>You have no notes yet</p>
     </ng-container>
   </div>
   <div id="router-note"><router-outlet></router-outlet></div>
