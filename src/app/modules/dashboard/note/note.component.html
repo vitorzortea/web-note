@@ -1,0 +1,17 @@
+<form>
+  <input [(ngModel)]="note.title" type="text" name="titel" placeholder="Title">
+  <select>
+    <option>Tag 1</option>
+    <option>Tag 2</option>
+    <option>Tag 3</option>
+    <option>Tag 4</option>
+  </select>
+  <textarea [(ngModel)]="note.text" name="text" placeholder="Your Note"></textarea>
+  <span>
+    <button (click)="send()">
+      <ng-container *ngIf="id">Update</ng-container>
+      <ng-container *ngIf="!id">Save</ng-container>
+    </button>
+    <button (click)="noteService.sendToTrash(id)"><i class="fas fa-trash-alt"></i></button>
+  </span>
+</form>

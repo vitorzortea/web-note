@@ -7,12 +7,15 @@ import { MenuComponent } from './menu/menu.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { TrashComponent } from './trash/trash.component';
 import { SettingComponent } from './setting/setting.component';
+import { NoteComponent } from './note/note.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [DashboardComponent, MenuComponent, AllNotesComponent, TrashComponent, SettingComponent],
+  declarations: [DashboardComponent, MenuComponent, AllNotesComponent, TrashComponent, SettingComponent, NoteComponent],
   imports: [
     CommonModule,
+    FormsModule,
     DashboardRoutingModule
   ]
 })
