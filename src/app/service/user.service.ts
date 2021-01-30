@@ -21,7 +21,7 @@ export class UserService {
 
   login(body): boolean{
     this.user = this.users.find((e)=> e.email === body.email && e.password === body.password)
-    localStorage.setItem('user', JSON.stringify(this.user))
+    if(this.user){ localStorage.setItem('user', JSON.stringify(this.user)) }
     return (this.user) ? true : false
   }
 
@@ -36,6 +36,7 @@ export class UserService {
     this.users.push(body);
     localStorage.setItem('users', JSON.stringify(this.users))
     alert(`Hi ${body.name}! your profile was created successfully`)
+    this.router.navigate(['/login'])
   }
 
   passUser(email){

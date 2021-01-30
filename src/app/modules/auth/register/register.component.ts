@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,11 +8,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+
+  samePass = false
+  error = '';
+
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  verifyPass(){}
+  createUser(){
+    if(!this.samePass){
+      return alert('O campo "Senha" e o campo "Confirmar Senha" tem que ser iguais')
+    }else{
+      const body = { id: '', name: this.name, email: this.email, password: this.password }
+      this.userService.setDefaultUsers();
+      this.userService.createUser(body);
+    }
+  }
+
+  verifyPass(){
+    if(this.password && this.confirmPassword){
+      if(this.password == this.confirmPassword){
+        this.samePass = true;
+        this.error = '';
+      } else {
+        this.samePass = false;
+        this.error = 'passwords diferentes';
+      }
+    }else{
+      this.samePass = false;
+      this.error = '';
+    }
+  }
 
 }

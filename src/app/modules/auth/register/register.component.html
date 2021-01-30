@@ -1,11 +1,12 @@
 <section>
   <h2>Sing Up</h2>
   <form>
-    <input type="text" name="nome" placeholder="Nome">
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="senha" placeholder="Senha" (change)="verifyPass()">
-    <input type="password" name="conf-senha" placeholder="Confirmar Senha" (change)="verifyPass()">
-    <button>Register</button>
+    <input [(ngModel)]="name" type="text" name="name" placeholder="Name">
+    <input [(ngModel)]="email" type="email" name="email" placeholder="Email">
+    <input [ngClass]="{'input-error': error}" [(ngModel)]="password" type="password" name="senha" placeholder="Password" (change)="verifyPass()">
+    <input [ngClass]="{'input-error': error}" [(ngModel)]="confirmPassword" type="password" name="conf-senha" placeholder="Confirm Password" (change)="verifyPass()">
+    <p class="error" *ngIf="error"><i class="fas fa-exclamation-triangle"></i> {{error}}</p>
+    <button (click)="createUser()">Register</button>
   </form>
   <p>
     <a routerLink="/login">To Back</a>
