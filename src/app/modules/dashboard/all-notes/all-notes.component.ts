@@ -8,15 +8,13 @@ import { NotesService } from 'src/app/service/notes.service';
   styleUrls: ['./all-notes.component.styl']
 })
 export class AllNotesComponent implements OnInit {
-  notes: Note[]
 
   constructor(
     public notesService: NotesService
   ) { }
 
   ngOnInit(): void {
-    this.notesService.ReadNote();
-    this.notes = this.notesService.notes
+    this.notesService.listNotes();
   }
 
 }

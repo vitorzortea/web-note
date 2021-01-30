@@ -14,15 +14,16 @@ export class NoteComponent implements OnInit {
   note: Note
   id: string
   subscription: Subscription
+  newNote = {id: '', title: '', resume: '', text: '', date: new Date()}
 
   constructor(
     public noteService: NotesService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router
   ) {
     this.subscription = route.params.subscribe(val => {
-      this.id = this.route.snapshot.paramMap.get('id');
-      (this.id) ? this.note = this.noteService.notes[this.id] : this.note = {title: '', resume: '', text: '', date: new Date()}
+      this.id = val.id;
+      (this.id) ? this.note = this.noteService.getNote(this.id) :  this.note = this.newNote
     });
   }
   ngOnInit(): void {}
@@ -39,6 +40,5 @@ export class NoteComponent implements OnInit {
     this.noteService.sendToTrash(this.id);
     this.router.navigate(['/dashboard/notes/'])
   }
-
   ngOnDestroy() { this.subscription.unsubscribe() }
 }

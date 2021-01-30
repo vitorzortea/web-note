@@ -15,7 +15,7 @@ export class TrashComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.notesService.ReadNote();
+    this.notesService.listNotes();
     this.notes = this.notesService.trash
   }
 

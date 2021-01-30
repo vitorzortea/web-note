@@ -13,16 +13,23 @@ export class NotesService {
 
   setDefaultNotes(){
     if(!localStorage.getItem('notes')){ localStorage.setItem('notes', JSON.stringify([])) }
-    if(!localStorage.getItem('notes')){ localStorage.setItem('trash', JSON.stringify([])) }
+    if(!localStorage.getItem('trash')){ localStorage.setItem('trash', JSON.stringify([])) }
   }
 
-  ReadNote(){
+  listNotes(){
     this.notes = JSON.parse(localStorage.getItem('notes'))
     this.trash = JSON.parse(localStorage.getItem('trash'))
   }
 
+  getNote(id){
+    this.listNotes();
+    return this.notes.find( e => id === e.id);
+  }
+
   createNote(body){
+    body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
     this.notes.push(body);
+    this.notes.sort();
     localStorage.setItem('notes', JSON.stringify(this.notes))
     alert('Note Create')
   }
@@ -39,9 +46,9 @@ export class NotesService {
   }
 
   sendToTrash(id){
-    const noteSelect = this.notes[id]
-    this.notes.splice(id,1)
-    this.trash.push(noteSelect)
+    const index = this.notes.findIndex( e => e.id === id)
+    this.trash.push(this.notes[index])
+    this.notes.splice(index,1)
     localStorage.setItem('notes', JSON.stringify(this.notes))
     localStorage.setItem('trash', JSON.stringify(this.trash))
   }

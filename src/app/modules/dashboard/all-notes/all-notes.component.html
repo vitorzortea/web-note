@@ -4,14 +4,14 @@
         <h1>All Notes</h1>
         <button routerLink="/dashboard/notes/new-note"><i class="fas fa-plus-circle"></i> Add Note</button>
       </span>
-      <form id="search-form" *ngIf="notes[1]">
+      <form id="search-form" *ngIf="notesService.notes[1]">
         <input type="search" placeholder="Search Note" />
         <i class="fas fa-search"></i>
       </form>
-    <ng-container *ngIf="notes[0]">
+    <ng-container *ngIf="notesService.notes[0]">
       <ul id="list-all-note" class="list-note">
-        <li *ngFor="let note of notes; let i=index">
-          <a routerLink="/dashboard/notes/edit/{{i}}" routerLinkActive="active">
+        <li *ngFor="let note of notesService.notes">
+          <a routerLink="/dashboard/notes/edit/{{note.id}}" routerLinkActive="active">
             <div class="date">
               <div>
                 <span>{{note.date | date: 'dd'}}</span>
@@ -30,7 +30,7 @@
         </li>
       </ul>
     </ng-container>
-    <ng-container *ngIf="!notes[0]">
+    <ng-container *ngIf="!notesService.notes[0]">
       <p>You have no notes yet</p>
     </ng-container>
   </div>

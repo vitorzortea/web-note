@@ -1,4 +1,5 @@
 export class Note {
+  id: string;
   title: string;
   resume: string;
   text: string;

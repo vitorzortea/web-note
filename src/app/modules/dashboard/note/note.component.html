@@ -8,10 +8,15 @@
   </select>
   <textarea [(ngModel)]="note.text" name="text" placeholder="Your Note"></textarea>
   <span>
-    <button (click)="send()">
+    <button (click)="send()" class="btn-note btn-blue">
       <ng-container *ngIf="id">Update</ng-container>
       <ng-container *ngIf="!id">Save</ng-container>
     </button>
-    <button (click)="trash()"><i class="fas fa-trash-alt"></i></button>
+    <span>
+      <ng-container *ngIf="id">
+        <button (click)="trash()" class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+      </ng-container>
+      <button routerLink="/dashboard/notes" class="btn-icon"><i class="fas fa-arrow-left"></i></button>
+    </span>
   </span>
 </form>
