@@ -1,9 +1,9 @@
 <section>
   <h2>Sing In</h2>
   <form>
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="senha" placeholder="Senha">
-    <button (click)="enterDashboard()" type='button'>Take note!</button>
+    <input [(ngModel)]="email"  type="email" name="email" placeholder="Email">
+    <input [(ngModel)]="password" type="password" name="senha" placeholder="Senha">
+    <button (click)="login()" type='button'>Take note!</button>
     <a routerLink="/forgotpass">Forgot Passwords</a>
   </form>
   <button routerLink="/register" id="bt-conta">Create an Account</button>

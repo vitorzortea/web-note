@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  email: string
+  password: string
+
   constructor(
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -19,6 +24,17 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard'])
   }
 
-  verifyPass(){}
+  login(){
+    this.userService.setDefaultUsers();
+    if(!this.email || !this.password){
+      return alert('Todos os campos!');
+    }
+    if(this.userService.login({email: this.email, password: this.password})){
+      this.router.navigate(['/dashboard'])
+    }else{
+      alert('Usuário invalido')
+    }
+
+  }
 
 }
