@@ -35,9 +35,11 @@ export class NotesService {
   }
 
   updateNote(id, body){
-    this.notes[id] = body;
+    const index = this.notes.findIndex( e => e.id === id)
+    body.resume = body.text.substring(0,120) + '...'
+    this.notes[index] = body;
     localStorage.setItem('notes', JSON.stringify(this.notes))
-    alert('Note Save')
+    alert('Note updated successfully')
   }
 
   deleteNote(id){
