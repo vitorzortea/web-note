@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../models/note.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,9 @@ import { Note } from '../models/note.model';
 export class NotesService {
 
   notes: Note[]
+  allNotes: Note[]
   trash: Note[]
+  allTrash: Note[]
 
   constructor() { }
 
@@ -17,12 +20,19 @@ export class NotesService {
   }
 
   listNotes(){
-    this.notes = JSON.parse(localStorage.getItem('notes'))
-    this.trash = JSON.parse(localStorage.getItem('trash'))
-    this.notes.sort((a, b) => (a.date < b.date) ? 1 : -1);
-    localStorage.setItem('notes', JSON.stringify(this.notes))
-    this.trash.sort((a, b) => (a.date < b.date) ? 1 : -1);
-    localStorage.setItem('trash', JSON.stringify(this.trash))
+    const user = JSON.parse(localStorage.getItem('user')) as User
+    this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    this.allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    this.sortNotes(this.allNotes, this.allTrash)
+    this.notes = this.allNotes.filter((e)=> e.idUser === user.id);
+    this.trash = this.allTrash.filter((e)=> e.idUser === user.id);
+  }
+
+  sortNotes(notes, trash) {
+    notes.sort((a, b) => (a.date < b.date) ? 1 : -1);
+    localStorage.setItem('notes', JSON.stringify(notes))
+    trash.sort((a, b) => (a.date < b.date) ? 1 : -1);
+    localStorage.setItem('trash', JSON.stringify(trash))
   }
 
   getNote(id){
@@ -30,33 +40,42 @@ export class NotesService {
     return this.notes.find( e => id === e.id);
   }
 
-  createNote(body){
-    body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+  createNote(body: Note){
+    this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const user = JSON.parse(localStorage.getItem('user')) as User
+    body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
+    body.idUser = user.id;
     body.resume = body.text.substring(0,120) + '...'
-    this.notes.push(body);
-    localStorage.setItem('notes', JSON.stringify(this.notes))
+    this.allNotes.push(body)
+    localStorage.setItem('notes', JSON.stringify(this.allNotes))
+    this.listNotes();
     alert('Note created successfully')
   }
 
   updateNote(id, body){
-    const index = this.notes.findIndex( e => e.id === id)
+    const index = this.allNotes.findIndex( e => e.id === id)
     body.resume = body.text.substring(0,120) + '...'
-    this.notes[index] = body;
-    localStorage.setItem('notes', JSON.stringify(this.notes))
+    this.allNotes[index] = body;
+    localStorage.setItem('notes', JSON.stringify(this.allNotes))
     alert('Note updated successfully')
   }
 
   deleteNote(id){
-    this.trash.splice(id,1)
-    localStorage.setItem('trash', JSON.stringify(this.trash))
+    const index = this.allTrash.findIndex( e => e.id === id)
+    this.allTrash.splice(index,1)
+    localStorage.setItem('trash', JSON.stringify(this.allTrash))
+    this.listNotes()
+    console.log(this.allTrash)
+    console.log(this.trash)
   }
 
   sendToTrash(id){
-    const index = this.notes.findIndex( e => e.id === id)
-    this.trash.push(this.notes[index])
-    this.notes.splice(index,1)
-    localStorage.setItem('notes', JSON.stringify(this.notes))
-    localStorage.setItem('trash', JSON.stringify(this.trash))
+    const index = this.allNotes.findIndex( e => e.id === id)
+    this.allTrash.push(this.notes[index])
+    this.allNotes.splice(index,1)
+    localStorage.setItem('notes', JSON.stringify(this.allNotes))
+    localStorage.setItem('trash', JSON.stringify(this.allTrash))
+    this.listNotes()
   }
 
   restoreTrash(id){
