@@ -28,10 +28,10 @@ export class NotesService {
 
   createNote(body){
     body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+    body.resume = body.text.substring(0,120) + '...'
     this.notes.push(body);
-    this.notes.sort();
     localStorage.setItem('notes', JSON.stringify(this.notes))
-    alert('Note Create')
+    alert('Note created successfully')
   }
 
   updateNote(id, body){
