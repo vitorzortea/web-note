@@ -1,8 +1,8 @@
 <section>
   <h2>Forgot Passwords</h2>
   <form>
-    <input type="email" name="email" placeholder="Email">
-    <button>Recover</button>
+    <input [(ngModel)]="email" type="email" name="email" placeholder="Email">
+    <button (click)="userService.passUser(email)">Recover</button>
     <p>
       <a routerLink="/login">To Back</a>
     </p>
