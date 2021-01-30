@@ -19,6 +19,10 @@ export class NotesService {
   listNotes(){
     this.notes = JSON.parse(localStorage.getItem('notes'))
     this.trash = JSON.parse(localStorage.getItem('trash'))
+    this.notes.sort((a, b) => (a.date < b.date) ? 1 : -1);
+    localStorage.setItem('notes', JSON.stringify(this.notes))
+    this.trash.sort((a, b) => (a.date < b.date) ? 1 : -1);
+    localStorage.setItem('trash', JSON.stringify(this.trash))
   }
 
   getNote(id){
