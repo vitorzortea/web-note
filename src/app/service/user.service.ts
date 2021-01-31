@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
+  user: User;
 
   constructor(
     private router: Router
@@ -22,6 +23,8 @@ export class UserService {
     if(user){ localStorage.setItem('user', JSON.stringify(user)) }
     return (user) ? true : false
   }
+
+  getUser(){ return JSON.parse(localStorage.getItem('user')) as User; }
 
   logout(){
     localStorage.removeItem('user');

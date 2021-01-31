@@ -54,6 +54,16 @@ export class SettingComponent implements OnInit {
     localStorage.setItem('users', JSON.stringify(this.users))
     localStorage.setItem('user', JSON.stringify(this.user))
     this.nameTag = '';
+    this.userService.user = this.userService.getUser()
+  }
+
+  deleteTag(index){
+    alert('aqui')
+    this.users[this.indexUser].tags.splice(index,1)
+    this.user.tags.splice(index,1)
+    localStorage.setItem('users', JSON.stringify(this.users))
+    localStorage.setItem('user', JSON.stringify(this.user))
+    this.userService.user = this.userService.getUser()
   }
 
 }

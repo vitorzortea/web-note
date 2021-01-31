@@ -1,10 +1,8 @@
 <form>
   <input [(ngModel)]="note.title" type="text" name="titel" placeholder="Title">
-  <select>
-    <option>Tag 1</option>
-    <option>Tag 2</option>
-    <option>Tag 3</option>
-    <option>Tag 4</option>
+  <select [(ngModel)]="note.tag" name="tag">
+    <option [ngValue]="">No Tag</option>
+    <option *ngFor="let tag of userService.user.tags" [ngValue]="tag">{{tag}}</option>
   </select>
   <textarea [(ngModel)]="note.text" name="text" placeholder="Your Note"></textarea>
   <span>

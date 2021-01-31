@@ -12,7 +12,6 @@ export class MenuComponent implements OnInit {
     public userService: UserService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { this.userService.user = this.userService.getUser() }
 
 }

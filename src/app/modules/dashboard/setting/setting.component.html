@@ -25,7 +25,7 @@
         <button (click)="createTags()" class="btn-note btn-gray">Create Tag</button>
         <ul *ngIf="user.tags">
           <li *ngFor="let tag of user.tags; let i=index" >
-            <button><i class="fas fa-trash"></i></button> {{tag}}
+            <button (click)="deleteTag(i)"><i class="fas fa-trash"></i></button> {{tag}}
           </li>
         </ul>
       </div>

@@ -46,6 +46,7 @@ export class NotesService {
   }
 
   createNote(body: Note, mensagem?: boolean){
+    console.log(body)
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const user = JSON.parse(localStorage.getItem('user')) as User
     body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)

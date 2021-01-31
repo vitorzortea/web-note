@@ -4,6 +4,7 @@ import { jsPDF } from "jspdf";
 import { Subscription } from 'rxjs';
 import { Note } from 'src/app/models/note.model';
 import { NotesService } from 'src/app/service/notes.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-note',
@@ -18,6 +19,7 @@ export class NoteComponent implements OnInit {
 
   constructor(
     public noteService: NotesService,
+    public userService: UserService,
     public route: ActivatedRoute,
     private router: Router
   ) {
