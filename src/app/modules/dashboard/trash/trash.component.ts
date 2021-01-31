@@ -15,19 +15,18 @@ export class TrashComponent implements OnInit {
     public notesService: NotesService
   ) { }
 
-  ngOnInit(): void {
-    this.notesService.listNotes();
-  }
+  ngOnInit(): void { this.notesService.trash = this.notesService.listTrash() }
 
   empty(){
     const user = JSON.parse(localStorage.getItem('user')) as User
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    const newTrash = allTrash.filter((e)=>e.idUser !== user.id);
     this.notesService.trash = [];
-    this.notesService.allTrash.filter((e)=>e.idUser !== user.id);
-    localStorage.setItem('trash', JSON.stringify(this.notesService.allTrash))
+    localStorage.setItem('trash', JSON.stringify(newTrash))
   }
 
   searchNote(){
-    this.notesService.listNotes();
+    this.notesService.trash = this.notesService.listTrash();
     if(this.search){
       this.notesService.trash = this.notesService.trash.filter((e)=> e.title.indexOf(this.search) == 0 || e.text.indexOf(this.search) == 0 )
     }

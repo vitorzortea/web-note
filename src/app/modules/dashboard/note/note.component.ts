@@ -28,6 +28,8 @@ export class NoteComponent implements OnInit {
   }
   ngOnInit(): void {}
 
+  updateList(){ this.noteService.notes = this.noteService.listNotes() }
+
   send() {
     if (this.id) {
       this.noteService.updateNote(this.id, this.note)
@@ -36,10 +38,12 @@ export class NoteComponent implements OnInit {
       this.noteService.createNote(this.note)
       this.router.navigate(['/dashboard/notes/'])
     }
+    this.updateList();
   }
 
   trash() {
-    this.noteService.sendToTrash(this.id);
+    this.noteService.sendToTrash(this.id)
+    this.updateList()
     this.router.navigate(['/dashboard/notes/'])
   }
 

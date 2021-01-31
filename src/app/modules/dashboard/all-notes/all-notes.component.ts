@@ -14,12 +14,10 @@ export class AllNotesComponent implements OnInit {
     public notesService: NotesService
   ) { }
 
-  ngOnInit(): void {
-    this.notesService.listNotes();
-  }
+  ngOnInit(): void { this.notesService.notes = this.notesService.listNotes() }
 
   searchNote(){
-    this.notesService.listNotes();
+    this.notesService.notes = this.notesService.listNotes();
     if(this.search){
       this.notesService.notes = this.notesService.notes.filter((e)=> e.title.indexOf(this.search) == 0 || e.text.indexOf(this.search) == 0 )
     }

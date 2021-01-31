@@ -7,11 +7,8 @@ import { User } from '../models/user.model';
 })
 export class NotesService {
 
-  notes: Note[]
-  allNotes: Note[]
-  trash: Note[]
-  allTrash: Note[]
-  tags: string[]
+  notes: Note[];
+  trash: Note[];
 
   constructor() { }
 
@@ -22,76 +19,77 @@ export class NotesService {
 
   listNotes(){
     const user = JSON.parse(localStorage.getItem('user')) as User
-    this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
-    this.allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
-    this.sortNotes(this.allNotes, this.allTrash)
-    this.notes = this.allNotes.filter((e)=> e.idUser === user.id);
-    this.trash = this.allTrash.filter((e)=> e.idUser === user.id);
-    this.tags = JSON.parse(localStorage.getItem('tags')) as string[]
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    this.sortNotes(allNotes, 'notes')
+    return allNotes.filter((e)=> e.idUser === user.id);
+  }
+  listTrash(){
+    const user = JSON.parse(localStorage.getItem('user')) as User
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    this.sortNotes(allTrash, 'trash')
+    return allTrash.filter((e)=> e.idUser === user.id);
   }
 
-  sortNotes(notes, trash) {
-    notes.sort((a, b) => (a.date < b.date) ? 1 : -1);
-    localStorage.setItem('notes', JSON.stringify(notes))
-    trash.sort((a, b) => (a.date < b.date) ? 1 : -1);
-    localStorage.setItem('trash', JSON.stringify(trash))
+  sortNotes(array: Note[], bd: string) {
+    array.sort((a, b) => (a.date < b.date) ? 1 : -1)
+    localStorage.setItem(bd, JSON.stringify(array))
   }
 
   getNote(id){
-    this.listNotes();
-    return this.notes.find( e => id === e.id);
+    const notes = this.listNotes();
+    return notes.find( e => id === e.id);
   }
 
   getTrash(id){
-    this.listNotes();
-    return this.trash.find( e => id === e.id);
+    const notes = this.listTrash();
+    return notes.find( e => id === e.id);
   }
 
   createNote(body: Note, mensagem?: boolean){
-    this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const user = JSON.parse(localStorage.getItem('user')) as User
     body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
     body.idUser = user.id;
     body.resume = body.text.substring(0,120) + '...'
-    this.allNotes.push(body)
-    localStorage.setItem('notes', JSON.stringify(this.allNotes))
-    this.listNotes();
-    if(!mensagem){
-      alert('Note created successfully')
-    }
+    allNotes.push(body)
+    localStorage.setItem('notes', JSON.stringify(allNotes))
+    if(!mensagem){ alert('Note created successfully') }
   }
 
   updateNote(id, body){
-    const index = this.allNotes.findIndex( e => e.id === id)
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const index = allNotes.findIndex( e => e.id === id)
     body.resume = body.text.substring(0,120) + '...'
-    this.allNotes[index] = body;
-    localStorage.setItem('notes', JSON.stringify(this.allNotes))
+    allNotes[index] = body;
+    localStorage.setItem('notes', JSON.stringify(allNotes))
     alert('Note updated successfully')
   }
 
   deleteNote(id){
-    const index = this.allTrash.findIndex( e => e.id === id)
-    this.allTrash.splice(index,1)
-    localStorage.setItem('trash', JSON.stringify(this.allTrash))
-    this.listNotes()
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    const index = allTrash.findIndex( e => e.id === id)
+    allTrash.splice(index,1)
+    localStorage.setItem('trash', JSON.stringify(allTrash))
+    this.trash = this.listTrash()
   }
 
   sendToTrash(id){
-    const index = this.allNotes.findIndex( e => e.id === id)
-    this.allTrash.push(this.notes[index])
-    this.allNotes.splice(index,1)
-    localStorage.setItem('notes', JSON.stringify(this.allNotes))
-    localStorage.setItem('trash', JSON.stringify(this.allTrash))
-    this.listNotes()
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    const index = allNotes.findIndex( e => e.id === id)
+    allTrash.push(allNotes[index])
+    allNotes.splice(index,1)
+    localStorage.setItem('notes', JSON.stringify(allNotes))
+    localStorage.setItem('trash', JSON.stringify(allTrash))
   }
 
   restoreTrash(id){
-    const index = this.allTrash.findIndex( e => e.id === id)
-    console.log(this.trash[index])
-    this.allNotes.push(this.trash[index])
-    this.allTrash.splice(index,1)
-    localStorage.setItem('notes', JSON.stringify(this.allNotes))
-    localStorage.setItem('trash', JSON.stringify(this.allTrash))
-    this.listNotes()
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
+    const index = allTrash.findIndex( e => e.id === id)
+    allNotes.push(allTrash[index])
+    allTrash.splice(index,1)
+    localStorage.setItem('notes', JSON.stringify(allNotes))
+    localStorage.setItem('trash', JSON.stringify(allTrash))
   }
 }

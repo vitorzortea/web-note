@@ -37,7 +37,8 @@ export class SettingComponent implements OnInit {
   }
   exportAllNotes(){
     this.noteService.listNotes()
-    const myNotes = this.noteService.allNotes.map((e)=>{ if(e.idUser == this.user.id){ return e } })
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
+    const myNotes = allNotes.map((e)=>{ if(e.idUser == this.user.id){ return e } })
 
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(myNotes, null, 2)], {type: "text/plain"}));
