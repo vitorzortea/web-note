@@ -21,13 +21,13 @@ export class NotesService {
     const user = JSON.parse(localStorage.getItem('user')) as User
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     this.sortNotes(allNotes, 'notes')
-    return allNotes.filter((e)=> e.idUser === user.id);
+    return allNotes.filter((eFilter)=> eFilter.idUser.some((eSome)=> eSome == user.id));
   }
   listTrash(){
     const user = JSON.parse(localStorage.getItem('user')) as User
     const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
     this.sortNotes(allTrash, 'trash')
-    return allTrash.filter((e)=> e.idUser === user.id);
+    return allTrash.filter((eFilter)=> eFilter.idUser.some((eSome)=> eSome == user.id));
   }
 
   sortNotes(array: Note[], bd: string) {
@@ -50,7 +50,7 @@ export class NotesService {
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const user = JSON.parse(localStorage.getItem('user')) as User
     body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
-    body.idUser = user.id;
+    body.idUser = [user.id];
     body.resume = body.text.substring(0,120) + '...'
     allNotes.push(body)
     localStorage.setItem('notes', JSON.stringify(allNotes))

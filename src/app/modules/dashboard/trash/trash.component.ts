@@ -20,7 +20,7 @@ export class TrashComponent implements OnInit {
   empty(){
     const user = JSON.parse(localStorage.getItem('user')) as User
     const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[]
-    const newTrash = allTrash.filter((e)=>e.idUser !== user.id);
+    const newTrash = allTrash.filter((e)=>e.idUser.some((eSome)=> eSome == user.id));
     this.notesService.trash = [];
     localStorage.setItem('trash', JSON.stringify(newTrash))
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { jsPDF } from "jspdf";
 import { Subscription } from 'rxjs';
 import { Note } from 'src/app/models/note.model';
+import { User } from 'src/app/models/user.model';
 import { NotesService } from 'src/app/service/notes.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -14,8 +15,12 @@ import { UserService } from 'src/app/service/user.service';
 export class NoteComponent implements OnInit {
 
   note: Note
+  users: User[]
+  user: User
+  usercheck: boolean[]
   id: string
   subscription: Subscription
+  keyTap = false
 
   constructor(
     public noteService: NotesService,
@@ -76,6 +81,15 @@ export class NoteComponent implements OnInit {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  }
+
+  changeKey(){
+    this.keyTap = !this.keyTap
+    this.users = this.userService.getUsers()
+    this.user = this.userService.getUser();
+    this.usercheck = this.users.map((e)=>{
+      return (this.note.idUser) ? true : false
+    })
   }
 
   ngOnDestroy() { this.subscription.unsubscribe() }

@@ -40,7 +40,7 @@ export class SettingComponent implements OnInit {
   exportAllNotes(){
     this.noteService.listNotes()
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
-    const myNotes = allNotes.map((e)=>{ if(e.idUser == this.user.id){ return e } })
+    const myNotes = allNotes.map((e)=>{ if(e.idUser.some((eSome)=> eSome == this.user.id)){ return e } })
 
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(myNotes, null, 2)], {type: "text/plain"}));
@@ -70,8 +70,8 @@ export class SettingComponent implements OnInit {
   deleteAllData(){
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[];
     const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[];
-    localStorage.setItem('notes', JSON.stringify(allNotes.filter((e)=>e.idUser !== this.user.id)))
-    localStorage.setItem('trash', JSON.stringify(allTrash.filter((e)=>e.idUser !== this.user.id)))
+    localStorage.setItem('notes', JSON.stringify(allNotes.filter((e)=>e.idUser.some((eSome)=> eSome == this.user.id))))
+    localStorage.setItem('trash', JSON.stringify(allTrash.filter((e)=>e.idUser.some((eSome)=> eSome == this.user.id))))
     alert('Data successfully deleted')
   }
 

@@ -25,6 +25,7 @@ export class UserService {
   }
 
   getUser(){ return JSON.parse(localStorage.getItem('user')) as User; }
+  getUsers(){ return JSON.parse(localStorage.getItem('users')) as User[]; }
 
   logout(){
     localStorage.removeItem('user');
