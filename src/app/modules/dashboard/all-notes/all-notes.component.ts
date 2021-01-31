@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from 'src/app/models/note.model';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { NotesService } from 'src/app/service/notes.service';
 
 @Component({
@@ -9,12 +10,23 @@ import { NotesService } from 'src/app/service/notes.service';
 })
 export class AllNotesComponent implements OnInit {
   search: string
+  subscription: Subscription
+  tag: string
 
   constructor(
-    public notesService: NotesService
-  ) { }
+    public notesService: NotesService,
+    public route: ActivatedRoute
+  ) {
+    this.subscription = route.queryParams.subscribe(val => {
+      this.tag = val.tag;
+      this.notesService.notes = this.notesService.listNotes()
+      if(this.tag){
+        this.notesService.notes = this.notesService.notes.filter((e)=> e.tag == this.tag)
+      }
+    });
+  }
 
-  ngOnInit(): void { this.notesService.notes = this.notesService.listNotes() }
+  ngOnInit(): void { }
 
   searchNote(){
     this.notesService.notes = this.notesService.listNotes();

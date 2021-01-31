@@ -1,8 +1,9 @@
 <section>
   <div class="secondary-menu">
       <span>
-        <h1>All Notes</h1>
-        <button routerLink="/dashboard/notes/new-note"><i class="fas fa-plus-circle"></i> Add Note</button>
+        <h1 *ngIf="!tag">All Notes</h1>
+        <h1 *ngIf="tag">{{tag}}</h1>
+        <button routerLink="/dashboard/notes/new-note"  *ngIf="!tag"><i class="fas fa-plus-circle"></i> Add Note</button>
       </span>
       <form id="search-form" *ngIf="notesService.notes[1] || search">
         <input [(ngModel)]="search" (change)="searchNote()" name="search" type="search" placeholder="Search Note" />

@@ -13,7 +13,8 @@
   </nav>
   <div id="tags" *ngIf="userService.user.tags">
     <h2>Tags</h2>
-    <a routerLink="/" routerLinkActive="active" *ngFor="let tag of userService.user.tags">{{tag}}</a>
+    <a routerLink="/dashboard/notes">No Filter</a>
+    <a routerLink="/dashboard/notes" [queryParams]="{tag: tag}" *ngFor="let tag of userService.user.tags">{{tag}}</a>
   </div>
   <div id="footer-header">
     <button (click)="userService.logout()"><i class="far fa-sign-out-alt"></i> Log out</button>
