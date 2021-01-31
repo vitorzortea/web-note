@@ -57,13 +57,13 @@ export class NotesService {
     if(!mensagem){ alert('Note created successfully') }
   }
 
-  updateNote(id, body){
+  updateNote(id, body, mensagem?){
     const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const index = allNotes.findIndex( e => e.id === id)
     body.resume = body.text.substring(0,120) + '...'
     allNotes[index] = body;
     localStorage.setItem('notes', JSON.stringify(allNotes))
-    alert('Note updated successfully')
+    if(!mensagem){ alert('Note updated successfully') }
   }
 
   deleteNote(id){

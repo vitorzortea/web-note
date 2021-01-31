@@ -87,9 +87,16 @@ export class NoteComponent implements OnInit {
     this.keyTap = !this.keyTap
     this.users = this.userService.getUsers()
     this.user = this.userService.getUser();
-    this.usercheck = this.users.map((e)=>{
-      return (this.note.idUser) ? true : false
+    this.usercheck = this.users.map((eMap, i)=>{
+      return (this.note.idUser.some(eSome => eSome === eMap.id)) ? true : false
     })
+  }
+  sharedUser(){
+    this.note.idUser = []
+    this.usercheck.forEach((e,i)=>{
+      if(e){ this.note.idUser.push(this.users[i].id) }
+    })
+    this.noteService.updateNote(this.id, this.note, true)
   }
 
   ngOnDestroy() { this.subscription.unsubscribe() }

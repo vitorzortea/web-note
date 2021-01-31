@@ -31,7 +31,12 @@
     <form>
       <ng-container *ngFor="let checkUser of users; let i=index">
         <label *ngIf="checkUser.id != user.id">
-          <input [(ngModel)]="users" type="checkbox" name="user-1"> {{checkUser.name}}
+          <span>
+            <i *ngIf="usercheck[i]" class="fas fa-check-square"></i>
+            <i *ngIf="!usercheck[i]" class="far fa-square"></i>
+          </span>
+          <input (change)="sharedUser()" [(ngModel)]="usercheck[i]" type="checkbox" name="user-{{i}}" >
+          {{checkUser.name}}
         </label>
       </ng-container>
     </form>
