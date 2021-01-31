@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Note } from 'src/app/models/note.model';
 import { User } from 'src/app/models/user.model';
 import { NotesService } from 'src/app/service/notes.service';
@@ -18,7 +19,8 @@ export class SettingComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public noteService: NotesService
+    public noteService: NotesService,
+    private router: Router
   ){ }
 
   ngOnInit(): void {}
@@ -58,12 +60,26 @@ export class SettingComponent implements OnInit {
   }
 
   deleteTag(index){
-    alert('aqui')
     this.users[this.indexUser].tags.splice(index,1)
     this.user.tags.splice(index,1)
     localStorage.setItem('users', JSON.stringify(this.users))
     localStorage.setItem('user', JSON.stringify(this.user))
     this.userService.user = this.userService.getUser()
+  }
+
+  deleteAllData(){
+    const allNotes = JSON.parse(localStorage.getItem('notes')) as Note[];
+    const allTrash = JSON.parse(localStorage.getItem('trash')) as Note[];
+    localStorage.setItem('notes', JSON.stringify(allNotes.filter((e)=>e.idUser !== this.user.id)))
+    localStorage.setItem('trash', JSON.stringify(allTrash.filter((e)=>e.idUser !== this.user.id)))
+    alert('Data successfully deleted')
+  }
+
+  deleteUser(){
+    this.deleteAllData();
+    this.users.splice(this.indexUser, 1);
+    localStorage.setItem('users', JSON.stringify(this.users))
+    this.userService.logout();
   }
 
 }

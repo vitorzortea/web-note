@@ -11,11 +11,11 @@
           <input (change)="importNotes($event.target.files)" type="file" name="notes">
         </label>
         <button (click)="exportAllNotes()" class="btn-note btn-gray">Export all notes</button>
-        <button class="btn-note btn-gray">Empty my datas</button>
+        <button (click)="deleteAllData()" class="btn-note btn-gray">Empty my datas</button>
       </div>
       <div id="box-user" class="box-setting">
         <h2>User</h2>
-        <button class="btn-note btn-gray">Delete User</button>
+        <button (click)="deleteUser()" class="btn-note btn-gray">Delete User</button>
       </div>
     </div>
     <div>

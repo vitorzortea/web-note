@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     if(!this.samePass){
       return alert('O campo "Senha" e o campo "Confirmar Senha" tem que ser iguais')
     }else{
-      const body = { id: '', name: this.name, email: this.email, password: this.password }
+      const body = { id: '', name: this.name, email: this.email, password: this.password, tags: [] }
       this.userService.setDefaultUsers();
       this.userService.createUser(body);
     }
