@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from 'src/app/models/note.model';
+import { User } from 'src/app/models/user.model';
 import { NotesService } from 'src/app/service/notes.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { NotesService } from 'src/app/service/notes.service';
   styleUrls: ['./trash.component.styl']
 })
 export class TrashComponent implements OnInit {
-  notes: Note[]
 
   constructor(
     public notesService: NotesService
@@ -16,13 +16,13 @@ export class TrashComponent implements OnInit {
 
   ngOnInit(): void {
     this.notesService.listNotes();
-    this.notes = this.notesService.trash
   }
 
   empty(){
-    this.notes = [];
-    this.notesService.trash = this.notes;
-    localStorage.setItem('trash', JSON.stringify(this.notes))
+    const user = JSON.parse(localStorage.getItem('user')) as User
+    this.notesService.trash = [];
+    this.notesService.allTrash.filter((e)=>e.idUser !== user.id);
+    localStorage.setItem('trash', JSON.stringify(this.notesService.allTrash))
   }
 
 }

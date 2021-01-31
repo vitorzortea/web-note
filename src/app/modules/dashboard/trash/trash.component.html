@@ -2,16 +2,16 @@
   <div class="secondary-menu">
       <span>
         <h1>Trash</h1>
-        <button *ngIf="notes[0]" (click)="empty()"><i class="far fa-trash"></i> Empty the Trash</button>
+        <button *ngIf="notesService.trash[0]" (click)="empty()"><i class="far fa-trash"></i> Empty the Trash</button>
       </span>
-      <form id="search-form" *ngIf="notes[1]">
+      <form id="search-form" *ngIf="notesService.trash[1]">
         <input type="search" placeholder="Search Note" />
         <i class="fas fa-search"></i>
       </form>
-    <ng-container *ngIf="notes[0]">
+    <ng-container *ngIf="notesService.trash[0]">
       <ul id="list-all-note" class="list-note">
-        <li *ngFor="let note of notes; let i=index">
-          <a routerLink="/dashboard/trash/{{i}}" routerLinkActive="active">
+        <li *ngFor="let note of notesService.trash">
+          <a routerLink="/dashboard/trash/{{note.id}}" routerLinkActive="active">
             <div class="date">
               <div>
                 <span>{{note.date | date: 'dd'}}</span>
@@ -30,7 +30,7 @@
         </li>
       </ul>
     </ng-container>
-    <ng-container *ngIf="!notes[0]">
+    <ng-container *ngIf="!notesService.trash[0]">
       <p>There's nothing in the trash</p>
     </ng-container>
   </div>

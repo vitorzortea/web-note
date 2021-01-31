@@ -40,6 +40,11 @@ export class NotesService {
     return this.notes.find( e => id === e.id);
   }
 
+  getTrash(id){
+    this.listNotes();
+    return this.trash.find( e => id === e.id);
+  }
+
   createNote(body: Note){
     this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const user = JSON.parse(localStorage.getItem('user')) as User
@@ -65,8 +70,6 @@ export class NotesService {
     this.allTrash.splice(index,1)
     localStorage.setItem('trash', JSON.stringify(this.allTrash))
     this.listNotes()
-    console.log(this.allTrash)
-    console.log(this.trash)
   }
 
   sendToTrash(id){
@@ -79,10 +82,12 @@ export class NotesService {
   }
 
   restoreTrash(id){
-    const noteSelect = this.trash[id]
-    this.trash.splice(id,1)
-    this.notes.push(noteSelect)
-    localStorage.setItem('notes', JSON.stringify(this.notes))
-    localStorage.setItem('trash', JSON.stringify(this.trash))
+    const index = this.allTrash.findIndex( e => e.id === id)
+    console.log(this.trash[index])
+    this.allNotes.push(this.trash[index])
+    this.allTrash.splice(index,1)
+    localStorage.setItem('notes', JSON.stringify(this.allNotes))
+    localStorage.setItem('trash', JSON.stringify(this.allTrash))
+    this.listNotes()
   }
 }

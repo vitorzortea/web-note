@@ -21,8 +21,8 @@ export class SingleTrashComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.subscription = route.params.subscribe(val => {
-      this.id = this.route.snapshot.paramMap.get('id');
-      this.note = this.noteService.trash[this.id]
+      this.id = val.id;
+      (this.id) ? this.note = this.noteService.getTrash(this.id) :  this.note = new Note
     });
   }
 
