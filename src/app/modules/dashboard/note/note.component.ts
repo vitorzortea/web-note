@@ -59,8 +59,16 @@ export class NoteComponent implements OnInit {
       filename: this.note.title
    });
   }
-  print(){
-   window.print();
+  print(){ window.print(); }
+  export(){
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(this.note, null, 2)], {
+      type: "text/plain"
+    }));
+    a.setAttribute("download", this.note.title+".txt");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   ngOnDestroy() { this.subscription.unsubscribe() }
