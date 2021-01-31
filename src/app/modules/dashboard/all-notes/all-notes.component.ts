@@ -8,6 +8,7 @@ import { NotesService } from 'src/app/service/notes.service';
   styleUrls: ['./all-notes.component.styl']
 })
 export class AllNotesComponent implements OnInit {
+  search: string
 
   constructor(
     public notesService: NotesService
@@ -15,6 +16,13 @@ export class AllNotesComponent implements OnInit {
 
   ngOnInit(): void {
     this.notesService.listNotes();
+  }
+
+  searchNote(){
+    this.notesService.listNotes();
+    if(this.search){
+      this.notesService.notes = this.notesService.notes.filter((e)=> e.title.indexOf(this.search) == 0 || e.text.indexOf(this.search) == 0 )
+    }
   }
 
 }

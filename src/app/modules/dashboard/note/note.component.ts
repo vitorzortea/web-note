@@ -52,7 +52,6 @@ export class NoteComponent implements OnInit {
     `
     doc.html(box, {
       callback: function (doc) {
-        doc.setFontSize(12)
         doc.save();
         box.innerHTML = ``
       },
@@ -66,7 +65,7 @@ export class NoteComponent implements OnInit {
 
   export(){
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(this.note, null, 2)], {type: "text/plain"}));
+    a.href = URL.createObjectURL(new Blob(['['+JSON.stringify(this.note, null, 2)+']'], {type: "text/plain"}));
     a.setAttribute("download", this.note.title+".txt");
     document.body.appendChild(a);
     a.click();

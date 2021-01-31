@@ -1,0 +1,61 @@
+@import '../../../../style/global-btn'
+section
+  display: flex
+  flex-direction: column
+  min-height: calc(100vh - 40px)
+
+  #title
+    background: #e7e7e7
+    margin: -20px 0 0 -20px
+    width: calc(100% + 40px)
+    padding: 40px 20px 10px
+    font-size: 2em
+    text-transform: uppercase
+    border-bottom: solid 1px #848484
+    margin-bottom: 20px
+
+    h1
+      font-weight: normal
+
+  #settings
+    flex: auto
+    display: flex
+
+    &>div
+      display: flex
+      flex-direction: column
+
+      .box-setting
+        margin: 10px 8px 10px
+        border: solid 1px #606060
+        padding: 0 10px 10px
+        flex: auto
+        width: 100%
+        max-width: 300px
+        border-radius: 10px
+
+        &#box-user
+          flex: inherit
+
+        &>h2
+          font-size: 1.2em
+          line-height: 1em
+          display: table
+          padding: 0 5px
+          background: white
+          margin: -0.5em -5px 5px
+
+        input
+          width: 100%
+          border: solid 1px #9f9f9f
+          padding: 5px 10px
+          border-radius: 5px 5px 0 0
+          margin: 5px 0 -10px
+
+
+.btn-note
+  width: 100%
+  margin: 5px 0
+
+label input[type="file"]
+  display: none

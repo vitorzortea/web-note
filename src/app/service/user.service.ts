@@ -25,6 +25,10 @@ export class UserService {
     return (this.user) ? true : false
   }
 
+  setLogin(){
+    this.user = JSON.parse(localStorage.getItem('user'))
+  }
+
   logout(){
     this.user = null;
     localStorage.removeItem('user');

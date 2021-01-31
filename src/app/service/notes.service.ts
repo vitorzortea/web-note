@@ -45,7 +45,7 @@ export class NotesService {
     return this.trash.find( e => id === e.id);
   }
 
-  createNote(body: Note){
+  createNote(body: Note, mensagem?: boolean){
     this.allNotes = JSON.parse(localStorage.getItem('notes')) as Note[]
     const user = JSON.parse(localStorage.getItem('user')) as User
     body.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
@@ -54,7 +54,9 @@ export class NotesService {
     this.allNotes.push(body)
     localStorage.setItem('notes', JSON.stringify(this.allNotes))
     this.listNotes();
-    alert('Note created successfully')
+    if(!mensagem){
+      alert('Note created successfully')
+    }
   }
 
   updateNote(id, body){

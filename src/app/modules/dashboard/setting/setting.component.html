@@ -1,1 +1,35 @@
-<p>setting works!</p>
+<section>
+  <div id="title">
+    <h1>Settings</h1>
+  </div>
+  <div id="settings">
+    <div>
+      <div id="box-notes" class="box-setting">
+        <h2>Notes</h2>
+        <label>
+          <span class="btn-note btn-gray">Import Notes</span>
+          <input (change)="importNotes($event.target.files)" type="file" name="notes">
+        </label>
+        <button (click)="exportAllNotes()" class="btn-note btn-gray">Export all notes</button>
+        <button class="btn-note btn-gray">Empty my datas</button>
+      </div>
+      <div id="box-user" class="box-setting">
+        <h2>User</h2>
+        <button class="btn-note btn-gray">Delete User</button>
+      </div>
+    </div>
+    <div>
+      <div id="box-tag" class="box-setting">
+        <h2>Tags</h2>
+        <input type="text" name="name" placeholder="Name Tag">
+        <button class="btn-note btn-gray">Create Tag</button>
+        <ul>
+          <li><button><i class="fas fa-trash"></i></button> Tag 1</li>
+          <li><button><i class="fas fa-trash"></i></button> Tag 2</li>
+          <li><button><i class="fas fa-trash"></i></button> Tag 3</li>
+          <li><button><i class="fas fa-trash"></i></button> Tag 4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

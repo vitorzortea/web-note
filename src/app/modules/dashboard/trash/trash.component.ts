@@ -9,6 +9,7 @@ import { NotesService } from 'src/app/service/notes.service';
   styleUrls: ['./trash.component.styl']
 })
 export class TrashComponent implements OnInit {
+  search: string
 
   constructor(
     public notesService: NotesService
@@ -23,6 +24,13 @@ export class TrashComponent implements OnInit {
     this.notesService.trash = [];
     this.notesService.allTrash.filter((e)=>e.idUser !== user.id);
     localStorage.setItem('trash', JSON.stringify(this.notesService.allTrash))
+  }
+
+  searchNote(){
+    this.notesService.listNotes();
+    if(this.search){
+      this.notesService.trash = this.notesService.trash.filter((e)=> e.title.indexOf(this.search) == 0 || e.text.indexOf(this.search) == 0 )
+    }
   }
 
 }
