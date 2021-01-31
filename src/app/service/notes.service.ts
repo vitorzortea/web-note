@@ -11,12 +11,13 @@ export class NotesService {
   allNotes: Note[]
   trash: Note[]
   allTrash: Note[]
+  tags: string[]
 
   constructor() { }
 
   setDefaultNotes(){
-    if(!localStorage.getItem('notes')){ localStorage.setItem('notes', JSON.stringify([])) }
-    if(!localStorage.getItem('trash')){ localStorage.setItem('trash', JSON.stringify([])) }
+    if(!localStorage.getItem('notes')){ localStorage.setItem('notes', '[]') }
+    if(!localStorage.getItem('trash')){ localStorage.setItem('trash', '[]') }
   }
 
   listNotes(){
@@ -26,6 +27,7 @@ export class NotesService {
     this.sortNotes(this.allNotes, this.allTrash)
     this.notes = this.allNotes.filter((e)=> e.idUser === user.id);
     this.trash = this.allTrash.filter((e)=> e.idUser === user.id);
+    this.tags = JSON.parse(localStorage.getItem('tags')) as string[]
   }
 
   sortNotes(notes, trash) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from 'src/app/models/note.model';
+import { User } from 'src/app/models/user.model';
 import { NotesService } from 'src/app/service/notes.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -9,6 +10,10 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./setting.component.styl']
 })
 export class SettingComponent implements OnInit {
+  users = JSON.parse(localStorage.getItem('users')) as User[];
+  user = JSON.parse(localStorage.getItem('user')) as User;
+  indexUser = this.users.findIndex((e)=> e.id === this.user.id)
+  nameTag: string;
   notesImport = '';
 
   constructor(
@@ -30,11 +35,9 @@ export class SettingComponent implements OnInit {
     }
     fileReader.readAsText(file)
   }
-
   exportAllNotes(){
     this.noteService.listNotes()
-    this.userService.setLogin()
-    const myNotes = this.noteService.allNotes.map((e)=>{ if(e.idUser == this.userService.user.id){ return e } })
+    const myNotes = this.noteService.allNotes.map((e)=>{ if(e.idUser == this.user.id){ return e } })
 
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(myNotes, null, 2)], {type: "text/plain"}));
@@ -42,6 +45,14 @@ export class SettingComponent implements OnInit {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  }
+
+  createTags(){
+    this.users[this.indexUser].tags.push(this.nameTag);
+    this.user.tags.push(this.nameTag);
+    localStorage.setItem('users', JSON.stringify(this.users))
+    localStorage.setItem('user', JSON.stringify(this.user))
+    this.nameTag = '';
   }
 
 }

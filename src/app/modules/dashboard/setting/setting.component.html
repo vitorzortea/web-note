@@ -21,13 +21,12 @@
     <div>
       <div id="box-tag" class="box-setting">
         <h2>Tags</h2>
-        <input type="text" name="name" placeholder="Name Tag">
-        <button class="btn-note btn-gray">Create Tag</button>
-        <ul>
-          <li><button><i class="fas fa-trash"></i></button> Tag 1</li>
-          <li><button><i class="fas fa-trash"></i></button> Tag 2</li>
-          <li><button><i class="fas fa-trash"></i></button> Tag 3</li>
-          <li><button><i class="fas fa-trash"></i></button> Tag 4</li>
+        <input [(ngModel)]="nameTag"  type="text" name="nameTag" placeholder="Name Tag">
+        <button (click)="createTags()" class="btn-note btn-gray">Create Tag</button>
+        <ul *ngIf="user.tags">
+          <li *ngFor="let tag of user.tags; let i=index" >
+            <button><i class="fas fa-trash"></i></button> {{tag}}
+          </li>
         </ul>
       </div>
     </div>
