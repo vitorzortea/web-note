@@ -9,9 +9,10 @@ This project was developed with Angular version 11.0.7.
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Demo video
-
-[![Veja o video!](https://uploaddeimagens.com.br/images/003/060/600/original/video.png?1612180382)](https://www.youtube.com/watch?v=9tpeUg7LlQ0)
+<center>
+[![Veja o video!](https://uploaddeimagens.com.br/images/003/060/600/original/video.png?1612180382)](https://www.youtube.com/watch?v=9tpeUg7LlQ0)··
 [https://www.youtube.com/watch?v=9tpeUg7LlQ0](https://www.youtube.com/watch?v=9tpeUg7LlQ0)
+</center>
 
 ## Goals
 
@@ -26,7 +27,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 - [ ] Add Encryption to the notes before storing
 - [ ] Add a Docker File
-- [ ] Add Markdown Support
+- [X] Add Markdown Support
 - [X] **Add Multiuser Support**
 - [X] **Add note sharing between users**
 - [X] **Add note tagging or grouping**
