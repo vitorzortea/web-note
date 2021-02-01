@@ -10,7 +10,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Demo video
 
-[![Veja o video!](https://uploaddeimagens.com.br/images/003/060/600/original/video.png?1612180382)](https://www.youtube.com/watch?v=9tpeUg7LlQ0)··
+[![Veja o video!](https://uploaddeimagens.com.br/images/003/060/600/original/video.png?1612180382)](https://www.youtube.com/watch?v=9tpeUg7LlQ0)
+··
 [https://www.youtube.com/watch?v=9tpeUg7LlQ0](https://www.youtube.com/watch?v=9tpeUg7LlQ0)
 
 ## Goals
