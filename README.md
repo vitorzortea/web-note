@@ -1,27 +1,44 @@
-# WebNote
+# Cocus - Frontend Code Challenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.7.
+| Authentication Module | Banknote Control | Settings Panel |
+|---|---|---|
+|  ![](https://uploaddeimagens.com.br/images/003/060/397/original/1.png) |  ![](https://uploaddeimagens.com.br/images/003/060/399/original/2.png) |  ![](https://uploaddeimagens.com.br/images/003/060/400/original/3.png) |
 
-## Development server
+This project was developed with Angular version 11.0.7.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Goals
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [X] **Add notes with a Title** (Create Note)
+- [X] **Check those notes** (List Notes)
+- [X] **Check the detail of a note** (Read Note)
+- [X] **Edit a note** (Update Note)
+- [X] **Delete the ones we don’t need anymore** (Delete Note)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Bonus
 
-## Running unit tests
+- [ ] **Add Encryption to the notes before storing**
+- [ ] **Add a Docker File**
+- [ ] **Add Markdown Support**
+- [X] **Add Multiuser Support**
+- [X] **Add note sharing between users**
+- [X] **Add note tagging or grouping**
+- [ ] **Add possibility to link notes**
+- [X] **Add printable version**
+- [X] **Add possibility to save note as pdf**
+- [ ] **Add versioning of notes**
+- [X] **Filter notes in list view**
+- [X] **Import / export all notes from storage**
+- [ ] **Insert images into notes**
+- [X] **Search notes**
+- [X] **Sort notes in list view**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## My Suggestions
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [X] **Trash list**
+- [X] **Authentication Module**
+- [X] **Authentication Guard**
+- [X] **Configuration Panel**
