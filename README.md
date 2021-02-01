@@ -8,6 +8,11 @@ This project was developed with Angular version 11.0.7.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Demo video
+
+[![Veja o video!](https://github.com/vitorzortea/botcoins/blob/master/src/assets/img/videogif.gif?raw=true)](https://www.youtube.com/watch?v=eN1kmT7T06c&feature=youtu.be)
+[https://www.youtube.com/watch?v=eN1kmT7T06c&feature=youtu.be](https://www.youtube.com/watch?v=eN1kmT7T06c&feature=youtu.be)
+
 ## Goals
 
 - [X] **Add notes with a Title** (Create Note)
