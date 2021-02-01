@@ -9,10 +9,9 @@ This project was developed with Angular version 11.0.7.
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Demo video
-<center>
+
 [![Veja o video!](https://uploaddeimagens.com.br/images/003/060/600/original/video.png?1612180382)](https://www.youtube.com/watch?v=9tpeUg7LlQ0)··
 [https://www.youtube.com/watch?v=9tpeUg7LlQ0](https://www.youtube.com/watch?v=9tpeUg7LlQ0)
-</center>
 
 ## Goals
 
